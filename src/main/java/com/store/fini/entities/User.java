@@ -1,6 +1,7 @@
 package com.store.fini.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,7 +40,8 @@ public class User {
 	private String email;
 	
 	@ManyToOne
-	@JoinColumn(name = "address_id")
+	@Cascade(CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "address_id", referencedColumnName = "id")
 	private Address address;
 	
 	

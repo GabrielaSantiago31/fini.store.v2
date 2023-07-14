@@ -79,20 +79,26 @@ public class UserService {
 	
 	public void update(UserInputDto newUser, Long id) {
 		
+		Optional<Address> opt = addressRepository.findById(id);
+
+		if(!opt.isPresent()) {
+			throw new BusinessErrorException(HttpStatus.NOT_FOUND, "Address not found");
+		}
+
+		Address addressDb = opt.get();
+		addressRepository.save(opt.get());
+		
+		mapper.map(newUser.getAddress(), addressDb);
+
 		Optional<User> optional = userRepository.findById(id);
 		
-		if(!optional.isPresent()) {
+		if(optional.isEmpty()) {
 			throw new BusinessErrorException(HttpStatus.NOT_FOUND, "User not found.");
 		}
-		
-		mapper.map(newUser.getAddress(), optional.get().getAddress());
-	
-		addressRepository.save(optional.get().getAddress());
 		
 		User userDb = optional.get();
 		
 		mapper.map(newUser, userDb);	
-		
 		userRepository.save(userDb);
 		
 	}

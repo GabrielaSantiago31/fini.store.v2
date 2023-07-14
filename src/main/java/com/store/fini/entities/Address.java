@@ -13,29 +13,35 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Entity
 @Table(name = "db_address")
 public class Address {
 	
+	@Getter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Getter @Setter
 	private String street;
+	@Getter @Setter
 	private String number;
+	@Getter @Setter
 	private String city;
+	@Getter @Setter
 	private String state;
+	@Getter @Setter
 	private String zipCode;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "address", cascade=CascadeType.ALL , orphanRemoval = true)
 	private List<User> users = new ArrayList<>();
 	
 	

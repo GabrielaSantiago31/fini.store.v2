@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class UserInputDto {
-	
+
 	private String firstName;
 	private String lastName;
 	
