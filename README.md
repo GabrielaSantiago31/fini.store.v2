@@ -10,6 +10,8 @@ Sistema de gerenciamento de vendas e estoque de uma loja de doces.
 Após baixar o projeto, você pode abri-lo com o Eclipse IDE 2022-12. Para isso, na tela de launcher:
 - Clique com o botão esquerdo do mouse em File -> Import -> Existing Maven Projects -> Clique no botão Browse... 
 -> Selecione o projeto -> Selecione a opção finish.
+
+É necessário baixar ms.email também, pois este é um microsserviço responsável pelo envio de e-mails.
   
 ### :hammer_and_pick: Funcionalidade do Projeto 
 ---
@@ -46,6 +48,6 @@ O sistema ainda pode ser acessado pelo administrador, o qual pode se logar no si
 - Java 17
 - Spring Boot
 - Web Service (Via Cep)
-- Banco de dados H2
+- MySQL
 - Eclipse IDE
 - POO
