@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.github.GabrielaSantiago31.fini.store.v2.enumeration.UserRole;
-import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,32 +33,33 @@ import lombok.NoArgsConstructor;
 @Table(name="tb_user")
 public class User implements UserDetails{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(nullable = false)
 	private String firstName;
 	
+	@Column(nullable = false)
 	private String lastName;
 	
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String email;
 	
+	@Column(nullable = false)
 	private String phone1;
 	
+	@Column(nullable = true)
 	private String phone2;
 	
-	@Column(unique = true)
+	@Column(unique = true, nullable = false, length = 11)
 	private String cpf;
 	
+	@Column(nullable = false, length = 8)
 	private String dateOfBirth;
 	
-	@NonNull
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="address_id", referencedColumnName = "id")
 	private Address address;
@@ -70,12 +70,12 @@ public class User implements UserDetails{
 	@Column(unique = true)
 	private String login;
 	
+	@Column(nullable = false, length = 12)
 	private String password;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Order> orders = new ArrayList<>();
-	
 	
 	public User(String login, String password, UserRole role) {
 		this.login = login;

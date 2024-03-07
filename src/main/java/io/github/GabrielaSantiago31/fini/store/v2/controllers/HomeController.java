@@ -18,8 +18,10 @@ import io.github.GabrielaSantiago31.fini.store.v2.models.dto.response.UserRespon
 import io.github.GabrielaSantiago31.fini.store.v2.models.records.AuthenticationDto;
 import io.github.GabrielaSantiago31.fini.store.v2.security.TokenProvider;
 import io.github.GabrielaSantiago31.fini.store.v2.services.impl.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("finistore/home")
 public class HomeController {

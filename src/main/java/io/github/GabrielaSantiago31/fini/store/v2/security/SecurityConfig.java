@@ -33,11 +33,12 @@ public class SecurityConfig {
 	        .csrf(csrf -> csrf.disable())
 	        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 	        .authorizeHttpRequests(authorize -> authorize
-	            .requestMatchers(HttpMethod.POST, "/finistore/home/login").permitAll()
-	            .requestMatchers(HttpMethod.POST, "/finistore/home/register").permitAll()
+	            .requestMatchers(HttpMethod.POST, "/finistore/home/login","/finistore/home/register").permitAll()
+	            .requestMatchers("/finistore/home/register").permitAll()
 	            .requestMatchers("/finistore/address/**").hasRole("ADMIN")
-	            .requestMatchers(HttpMethod.GET, "/finistore/user/**").hasRole("ADMIN")
-	            .requestMatchers(HttpMethod.POST, "/finistore/user").hasRole("USER")
+	            .requestMatchers(HttpMethod.GET, "/finistore/user").hasRole("ADMIN")
+	            .requestMatchers(HttpMethod.GET, "/finistore/user/{id}").hasRole("USER")
+	            .requestMatchers(HttpMethod.POST, "/finistore/user").permitAll()
 	            .requestMatchers(HttpMethod.PUT, "/finistore/user/{id}" ).access(new WebExpressionAuthorizationManager("@webSecurity.checkUserId(authentication,#id)"))
 	            .requestMatchers("/finistore/order/**").permitAll()
 	            .requestMatchers("/finistore/payment/**").permitAll()
@@ -45,7 +46,19 @@ public class SecurityConfig {
 	            .requestMatchers(HttpMethod.POST,"/finistore/product").hasRole("ADMIN")
 	            .requestMatchers(HttpMethod.PUT,"/finistore/product").hasRole("ADMIN")
 	            .requestMatchers("/finistore/stock").hasRole("ADMIN")
-	            .anyRequest().authenticated())
+	            .requestMatchers("/api/v1/auth/**",
+	            		"/v2/api-docs",
+	            		"/v3/api-docs", 
+	            		"/v3/api-docs/**",
+	            		"/swagger-resources",
+	            		"/swagger-ui.html",
+	            		"/swagger-resources/**",
+	            		"/configuration/ui",
+	            		"/configuration/security",
+	            		"/webjars/**",
+	            		"/swagger-ui/**").permitAll()
+	            .anyRequest().authenticated()
+	            )
 	        .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
 	        .build();
 	  }

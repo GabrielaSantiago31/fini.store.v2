@@ -1,5 +1,6 @@
 package io.github.GabrielaSantiago31.fini.store.v2.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,6 +27,7 @@ public class Stock{
 	@MapsId
 	private Product product;
 	
+	@Column(nullable = false)
 	private Integer quantity;
 
 }

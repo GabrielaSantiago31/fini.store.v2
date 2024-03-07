@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.github.GabrielaSantiago31.fini.store.v2.models.dto.request.UserRequestDto;
+import io.github.GabrielaSantiago31.fini.store.v2.models.dto.request.UserUpdateRequestDto;
 import io.github.GabrielaSantiago31.fini.store.v2.models.dto.response.UserResponseDto;
 import io.github.GabrielaSantiago31.fini.store.v2.services.impl.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/finistore/user")
 public class UserController {
@@ -52,7 +55,7 @@ public class UserController {
 	
 	@PutMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void update(@PathVariable Long id, @RequestBody @Valid UserRequestDto userDto) {
-		userService.update(id, userDto);
+	public void update(@PathVariable Long id, @RequestBody @Valid UserUpdateRequestDto userUpdateDto) {
+		userService.update(id, userUpdateDto);
 	}
 }

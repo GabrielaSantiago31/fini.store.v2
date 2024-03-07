@@ -5,8 +5,8 @@ import java.util.List;
 
 import io.github.GabrielaSantiago31.fini.store.v2.models.OrderItem;
 import io.github.GabrielaSantiago31.fini.store.v2.models.User;
-import io.micrometer.common.lang.NonNull;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,10 +16,10 @@ import lombok.NoArgsConstructor;
 @Data
 public class OrderRequestDto {
 	
-	@NonNull
+	@NotNull(message = "required")
 	private User user;
 	
-	@NotEmpty
+	@NotEmpty(message = "required")
 	private List<OrderItem> orderItems = new ArrayList<>();
 	
 }

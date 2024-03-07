@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import io.github.GabrielaSantiago31.fini.store.v2.enumeration.PaymentStatus;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -27,10 +28,15 @@ public class Payment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(nullable = false)
 	private LocalDateTime moment;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(length = 10, nullable = false)
 	private PaymentStatus status;
+	
+	@Column(nullable = false)
 	private BigDecimal price; 
 	
 	@OneToOne

@@ -2,8 +2,8 @@ package io.github.GabrielaSantiago31.fini.store.v2.models.dto.request;
 
 import java.math.BigDecimal;
 
-import io.micrometer.common.lang.NonNull;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,28 +13,26 @@ import lombok.NoArgsConstructor;
 @Data
 public class ProductRequestDto {
 	
-	private Long id;
-	
-	@NotEmpty
+	@NotEmpty(message = "required")
 	private String code;
 	
-	@NotEmpty
+	@NotEmpty(message = "required")
 	private String name;
 	
-	@NotEmpty
+	@NotEmpty(message = "required")
 	private String flavor;
 	
-	@NotEmpty
+	@NotEmpty(message = "required")
 	private String category;
 	
 	private String description;
 	
 	private String imgUrl;
 	
-	@NonNull
+	@NotNull(message = "required")
 	private BigDecimal price;
 	
-	@NonNull
+	@NotNull(message = "required")
 	private Double gramsPerPackage;
 	
 }

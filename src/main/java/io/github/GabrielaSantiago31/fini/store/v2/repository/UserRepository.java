@@ -9,7 +9,7 @@ import io.github.GabrielaSantiago31.fini.store.v2.models.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
 	
-	User findByCpf(String cpf);
+	boolean existsByCpf(String cpf);
 	
 	UserDetails findByLogin(String login);
 	

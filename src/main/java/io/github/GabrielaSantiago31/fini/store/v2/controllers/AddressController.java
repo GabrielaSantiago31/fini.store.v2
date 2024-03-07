@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.github.GabrielaSantiago31.fini.store.v2.models.Address;
 import io.github.GabrielaSantiago31.fini.store.v2.services.impl.AddressService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/finistore/address")
 public class AddressController {

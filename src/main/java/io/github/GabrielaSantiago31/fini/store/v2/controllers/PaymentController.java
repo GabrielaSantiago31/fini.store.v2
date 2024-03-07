@@ -13,8 +13,10 @@ import io.github.GabrielaSantiago31.fini.store.v2.models.dto.request.PaymentRequ
 import io.github.GabrielaSantiago31.fini.store.v2.models.dto.response.PaymentResponseDto;
 import io.github.GabrielaSantiago31.fini.store.v2.services.IPayment;
 import io.github.GabrielaSantiago31.fini.store.v2.services.impl.PaymentService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("finistore/payment")
 public class PaymentController {

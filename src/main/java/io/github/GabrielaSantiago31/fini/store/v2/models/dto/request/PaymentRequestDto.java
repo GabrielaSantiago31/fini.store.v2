@@ -3,7 +3,7 @@ package io.github.GabrielaSantiago31.fini.store.v2.models.dto.request;
 import java.math.BigDecimal;
 
 import io.github.GabrielaSantiago31.fini.store.v2.models.Order;
-import io.micrometer.common.lang.NonNull;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +13,10 @@ import lombok.NoArgsConstructor;
 @Data
 public class PaymentRequestDto {
 	
-	@NonNull
+	@NotNull(message = "required")
 	private Order order;
-	@NonNull
+	
+	@NotNull(message = "required")
 	private BigDecimal price;
 
 }

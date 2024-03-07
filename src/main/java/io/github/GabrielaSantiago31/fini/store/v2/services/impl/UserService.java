@@ -18,6 +18,7 @@ import io.github.GabrielaSantiago31.fini.store.v2.exceptions.BusinessRuleExcepti
 import io.github.GabrielaSantiago31.fini.store.v2.mail.EmailService;
 import io.github.GabrielaSantiago31.fini.store.v2.models.User;
 import io.github.GabrielaSantiago31.fini.store.v2.models.dto.request.UserRequestDto;
+import io.github.GabrielaSantiago31.fini.store.v2.models.dto.request.UserUpdateRequestDto;
 import io.github.GabrielaSantiago31.fini.store.v2.models.dto.response.UserResponseDto;
 import io.github.GabrielaSantiago31.fini.store.v2.repository.UserRepository;
 import io.github.GabrielaSantiago31.fini.store.v2.services.IUser;
@@ -69,13 +70,14 @@ public class UserService implements IUser, UserDetailsService{
 			throw new BusinessRuleException("Address cannot be null.");
 		}
 		
-		if(userRepository.findByCpf(userFilled.getCpf()) != null) {
+		if(userRepository.existsByCpf(userFilled.getCpf())) {
 			throw new BusinessRuleException("This CPF is already registered.");
 		}
 		
 		String encryptedPassword = new BCryptPasswordEncoder().encode(userFilled.getPassword());
 		userFilled.setPassword(encryptedPassword);
 		
+		userFilled.setLogin(userFilled.getEmail());
 		userRepository.save(userFilled);
 		
 		UserResponseDto responseDto = mapper.map(userFilled, UserResponseDto.class);
@@ -93,24 +95,23 @@ public class UserService implements IUser, UserDetailsService{
 		
 	}
 	
-	public void update(Long id, UserRequestDto userDto) {
+	public void update(Long id, UserUpdateRequestDto userUpdateDto) {
 		
 		User oldUser = userRepository.findById(id)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found."));
+		
+		UserRequestDto userDto = mapper.map(userUpdateDto, UserRequestDto.class);
 		
 		User userFilled = addressService.fillAddressFields(userDto);
 		
 		userFilled.setId(oldUser.getId());
 		
-		
-		if(userDto.getCpf() == null) {
-			throw new BusinessRuleException("CPF cannot be null.");
-		}
-		
 		if(userDto.getAddress() == null || userDto.getAddress().getZipCode() == null) {
 			throw new BusinessRuleException("Address cannot be null.");
 		}
-	
+		
+		userFilled.setCpf(oldUser.getCpf());
+		userFilled.setLogin(userFilled.getEmail());
 		userRepository.save(userFilled);
 	}
 	
@@ -118,4 +119,5 @@ public class UserService implements IUser, UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return userRepository.findByLogin(username);
 	}
+
 }

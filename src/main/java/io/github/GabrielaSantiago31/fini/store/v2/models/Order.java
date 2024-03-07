@@ -7,6 +7,7 @@ import java.util.List;
 
 import io.github.GabrielaSantiago31.fini.store.v2.enumeration.OrderStatus;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -37,11 +38,14 @@ public class Order {
 	@JoinColumn(name="user_id")
 	private User user;
 	
+	@Column(nullable = false)
 	private LocalDateTime moment;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(length = 13, nullable = false)
 	private OrderStatus status;
 	
+	@Column(nullable = false)
 	private BigDecimal total;
 	
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
