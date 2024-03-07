@@ -22,7 +22,7 @@ public class EmailService {
 	private String mailHost;
 	
 	public void sendEmail(String mailTo, String subject, String text){
-		EmailRequest request = new EmailRequest(ownerRef, mailFrom, /*mailTo*/ "gabrielas.santiago@hotmail.com", subject, text);
+		EmailRequest request = new EmailRequest(ownerRef, mailFrom, mailTo, subject, text);
 		restTemplate.postForEntity(mailHost, request, Void.class);
 	}
 	

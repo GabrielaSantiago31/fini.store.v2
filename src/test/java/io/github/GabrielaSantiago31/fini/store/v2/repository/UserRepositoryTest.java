@@ -26,7 +26,7 @@ public class UserRepositoryTest {
 	@BeforeEach
 	void setUp() {
 		address = new Address(1L, "Rua P",32,"Fundos","Campo Grande","Rio de Janeiro","RJ","Brasil","69042670");
-		user = new User(1L,"Gabriela", "Santiago", "gabriela.santiago@gmail.com", "21968236525","","40628709080","290319",address,UserRole.ADMIN,"gabriela.santiago@gmail.com","12345678", null);
+		user = new User(1L,"Gabriela", "Santiago", "gabriela.santiago@gmail.com", "21968236925","","40628709080","290319",address,UserRole.ADMIN,"gabriela.santiago@gmail.com","12345678", null);
 	}
 	
 	@DisplayName("Save a user")
