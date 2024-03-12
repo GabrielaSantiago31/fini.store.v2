@@ -8,7 +8,7 @@
 		<version>3.2.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>io.github.GabrielaSantiago31</groupId>
+	<groupId>io.github.gabriela.santiago31</groupId>
 	<artifactId>fini.store.v2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>fini.store.v2</name>
