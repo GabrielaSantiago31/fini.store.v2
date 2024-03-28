@@ -20,16 +20,20 @@ Os dados são verificados assim que inseridos, não permitindo o registro de dad
 A confirmação do endereço se dá através de um Web Service, o qual é utilizado para completar e validar o endereço do cliente quando o mesmo insere o cep.<br/>
 Caso o cliente já esteja registrado no banco de dados, a ele serão apresentadas as opções de fazer log in ou sair.
 
-- <kbd>Log in:</kbd> O usuário poderá fazer o login no sistema utilizando o email e a senha cadastrados. Caso haja um equívoco no login e/ou na senha, o sistema informará que há um erro e o usuário poderá tentar novamente ou encerrar a sessão.
+- <kbd>Log in:</kbd> O usuário poderá fazer o login no sistema utilizando o email e a senha cadastrados. Caso haja um equívoco no login e/ou na senha, o sistema não permitirá o acesso.
 
 - <kbd>Catálogo de produtos:</kbd> Uma vez que o login é confirmado, o cliente poderá conferir os produtos disponíveis.
   
-- <kbd>Fazer um pedido:</kbd> O cliente poderá fazer um pedido. Ao clicar na opção, ele deverá informar o código do produto e a quantidade desejada.
-A quantidade de ingredientes no estoque é decrescida de acordo com o produto (e os ingredientes que são necessários para fabricar um pacote) e a quantidade desejada (a quantidade total dos ingredientes para a quantidade de pacotes desejados),
-assim, caso não haja ingredientes suficientes para a realização do pedido, o cliente é informado e, assim, poderá escolher outro produto ou retornar ao menu.<br/>
+- <kbd>Fazer um pedido:</kbd> O cliente poderá fazer um pedido, informando o produto selecionado e a quantidade. O pedido só será aceito se houver a quantidade necessária em estoque.
 Caso o pedido seja confirmado, o cliente receberá um email de confirmação.
 
+- <kbd>Cancelar um pedido:</kbd> O cliente poderá cancelar um pedido que já foi pago.
+
 - <kbd>Atualizar dados:</kbd> O cliente ainda poderá atualizar os seus dados cadastrais.
+  
+- <kbd>Realizar pagamento:</kbd> Após a realização do pedido, é necessário que o cliente efetue o pagamento. O status do pedido será alterado e o seu envio ocorrerá quando o pagamento for efetuado.
+
+- <kbd>Atualizar dados:</kbd> O cliente poderá alterar seus dados, exceto seu cpf.
 
 - <kbd>Log out:</kbd> O cliente poderá sair do sistema.
 
@@ -37,9 +41,9 @@ O sistema ainda pode ser acessado pelo administrador, o qual pode se logar no si
 
 - <kbd>Registrar um produto:</kbd> O administrador poderá cadastrar um produto novo, inserindo as informações: sabor, preço, gramas por pacote, nome, ingredientes dentre outras.
 
-- <kbd>Registrar ingredientes:</kbd> O admnistrador pode aumentar a quantidade de ingredientes no estoque, bem como adicionar um ingrediente novo caso necessário.
+- <kbd>Administrar o estoque:</kbd> O admnistrador pode ver os produtos em estoque e as suas informações, aumentar a quantidade de um ou mais produtos, bem como adicionar um produto novo caso seja necessário.
 
-- <kbd>Atualizar dados:</kbd> O administrador poderá atualizar os dados de acesso ao sistema.
+- <kbd>Acompanhar o status de um pedido:</kbd> O admnistrador pode verificar o status de um pedido.
 
 - <kbd>Log out:</kbd> O administrador poderá encerrar a sessão.
 
@@ -47,7 +51,11 @@ O sistema ainda pode ser acessado pelo administrador, o qual pode se logar no si
 ---
 - Java 17
 - Spring Boot
+- Spring security - JWT token
+- Swagger
 - Web Service (Via Cep)
 - MySQL
+- H2
+- JUnit
 - Eclipse IDE
 - POO
